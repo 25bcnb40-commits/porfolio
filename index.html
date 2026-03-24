@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Portfolio</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Link to external CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <canvas id="particles"></canvas>
+
+    <!-- Header -->
+    <header>
+        <h1 class="neon-text">Rehan Akhtar</h1>
+        <p>BCA | Specialization in Data Analytics</p>
+    </header>
+
+    <!-- About Me -->
+    <section>
+        <h2>About Me</h2>
+        <div class="card">
+            <p>
+                I am a passionate and dedicated student currently pursuing 
+                Bachelor of Computer Applications (BCA) with specialization in Data Analytics.
+                I am deeply interested in programming, problem-solving, and building creative digital solutions.
+            </p>
+            <p>
+                I continuously work on improving my technical skills and enjoy exploring 
+                new technologies that enhance both creativity and logic.
+            </p>
+        </div>
+    </section>
+
+    <!-- Skills -->
+    <section>
+        <h2>Technical Skills</h2>
+        <div class="card">
+            <h3>Programming Languages</h3>
+            <ul>
+                <li>C Programming</li>
+                <li>Python</li>
+                <li>Lua</li>
+                <li>JavaScript</li>
+            </ul>
+
+            <h3>Core Concepts</h3>
+            <ul>
+                <li>Data Structures</li>
+                <li>Algorithms (Basic)</li>
+                <li>Database Fundamentals</li>
+                <li>Problem Solving</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Academic Focus -->
+    <section>
+        <h2>Academic Focus</h2>
+        <div class="card">
+            <p>
+                As a BCA student specializing in Data Analytics, I am developing 
+                knowledge in data interpretation, structured data management, 
+                and analytical thinking to transform raw data into meaningful insights.
+            </p>
+        </div>
+    </section>
+
+    <!-- Career Objective -->
+    <section>
+        <h2>Career Objective</h2>
+        <div class="card">
+            <p>
+                My future goal is to become a Game Developer or Software Developer.
+                I am especially interested in game logic, scripting using Lua,
+                and creating interactive experiences that combine creativity and technology.
+            </p>
+        </div>
+    </section>
+
+    <!-- Projects -->
+    <section>
+    <h2>Projects</h2>
+    <div class="game-row">
+  <a href="https://www.roblox.com/games/13856599932/random-obby" class="game-card">
+    <img src="https://cdn.discordapp.com/attachments/1184984613479796827/1476298447165329660/IMG-20260226-WA0008.jpg?ex=69a09d92&is=699f4c12&hm=dd92c2b34265993d0e99df8a3decf3319946069c2074d6e167941ff4e6d3e288&" alt="Simple Obby">
+    <div class="card-text">
+      <h3>Simple Obby</h3>
+      <p>Classic obstacles and custom stages.</p>
+    </div>
+  </a>
+
+  <a href="https://www.roblox.com/games/121574392991834/team-match-4vs4" class="game-card">
+    <img src="https://cdn.discordapp.com/attachments/1184984613479796827/1476298446855082124/IMG-20260226-WA0011.jpg?ex=69a09d92&is=699f4c12&hm=0f1d68203514d827517bf2f8781744a43a703b1a989641a5eed98864e4a44012&" alt="4vs4 Team Fight">
+    <div class="card-text">
+      <h3>4vs4 Team Fight</h3>
+      <p>Strategic team-based combat.</p>
+    </div>
+  </a>
+
+  <a href="https://www.roblox.com/games/121608458682335/Sword-fight" class="game-card">
+    <img src="https://cdn.discordapp.com/attachments/1184984613479796827/1476298447681355877/IMG-20260226-WA0007.jpg?ex=69a09d92&is=699f4c12&hm=b808ab8ed0e6171bdb807bd45f513227989190c6e15e43f7381e6bb47717ca85&" alt="Sword Fight">
+    <div class="card-text">
+      <h3>Sword Fight</h3>
+      <p>Skill-based melee arena.</p>
+      </div>
+      <a href="https://25bcnb40-commits.github.io/WPM-test-/" class="game-card">
+    <img src="https://cdn.discordapp.com/attachments/1184984613479796827/1476303266706100316/IMG-20260226-WA0013.jpg?ex=69a0a20f&is=699f508f&hm=3c7c3d9965a3c5198f974909c5efe444402b77e53349021ed226a7f27ea93003&" alt="WPM Tester">
+    <div class="card-text">
+      <h3>WPM Tester</h3>
+      <p>A tool to track typing speed and accuracy.</p>
+    </div>
+  </a>
+</div>  
+</section>
+    <!--contacts-->
+    <section>
+        <h3>Send Feedback</h3>
+
+<form id="feedbackForm">
+    <input type="text" id="name" placeholder="Your Name" required><br><br>
+    <input type="email" id="email" placeholder="Your Email" required><br><br>
+    <textarea id="message" placeholder="Your Feedback" required></textarea><br><br>
+    <button type="submit">Submit</button>
+</form>
+
+<p id="responseMessage"></p>
+    </section>
+    <script>
+document.getElementById("feedbackForm").addEventListener("submit", async function(e) {
+    e.preventDefault();
+
+    const name = document.getElementById("name").value;
+    const email = document.getElementById("email").value;
+    const message = document.getElementById("message").value;
+
+    const responseMsg = document.getElementById("responseMessage");
+    responseMsg.innerText = "Sending...";
+
+    try {
+        const response = await fetch("https://formspree.io/f/mzdkpbyr", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            },
+            body: JSON.stringify({ name, email, message })
+        });
+
+        if (response.ok) {
+            responseMsg.innerText = "Feedback sent! Thank you.";
+            document.getElementById("feedbackForm").reset();
+        } else {
+            responseMsg.innerText = "Something went wrong. Please try again.";
+        }
+    } catch (error) {
+        responseMsg.innerText = "Network error. Please try again.";
+    }
+});
+</script>
+<script>
+    const cards = document.querySelectorAll('.card');
+
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('show');
+            }
+        });
+    });
+
+    cards.forEach(card => {
+        observer.observe(card);
+    });
+</script>      
+<script>
+const canvas = document.getElementById("particles");
+const ctx = canvas.getContext("2d");
+
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+let particlesArray = [];
+
+class Particle {
+    constructor() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.size = Math.random() * 2 + 1;
+        this.speedX = Math.random() * 1 - 0.5;
+        this.speedY = Math.random() * 1 - 0.5;
+    }
+
+    update() {
+        this.x += this.speedX;
+        this.y += this.speedY;
+
+        if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
+        if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
+    }
+
+    draw() {
+        ctx.fillStyle = "#00f7ff";
+        ctx.shadowBlur = 10;
+        ctx.shadowColor = "#00f7ff";
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fill();
+    }
+}
+
+function init() {
+    particlesArray = [];
+    for (let i = 0; i < 120; i++) {
+        particlesArray.push(new Particle());
+    }
+}
+
+function animate() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    particlesArray.forEach(particle => {
+        particle.update();
+        particle.draw();
+    });
+    requestAnimationFrame(animate);
+}
+
+init();
+animate();
+
+window.addEventListener("resize", function() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    init();
+});
+</script>

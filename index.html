@@ -140,7 +140,7 @@ document.getElementById("feedbackForm").addEventListener("submit", async functio
     responseMsg.innerText = "Sending...";
 
     try {
-        const response = await fetch("https://formspree.io/f/mzdkpbyr", {
+        const response = await fetch("https://YOUR_RENDER_APP_NAME.onrender.com/feedback", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
